@@ -7,5 +7,5 @@ if (window.location.href.match(/\.geojson$/)) {
     button.innerHTML = 'geojson.io';
     button.className = 'button minibutton';
     button.setAttribute('_target', 'blank');
-    button.setAttribute('href', 'http://localhost:3000/#github:' + location.pathname);
+    button.setAttribute('href', 'http://localhost:8080/#github:' + location.pathname);
 }
