@@ -4,7 +4,7 @@
     "description" : "Edit files on GitHub and elsewhere in geojson.io",
     "homepage_url" : "http://geojson.io/",
     "content_scripts" : [{
-        "matches" : ["*://github.com/*"],
+        "matches" : ["*://github.com/*", "*://gist.github.com/*"],
         "js" : ["geojsonio.js"]
     }],
     "web_accessible_resources": [

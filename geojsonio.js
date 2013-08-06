@@ -2,16 +2,47 @@ function injection() {
     function getClassed(e, c) { return e.getElementsByClassName(c); }
 
     function geojsonioStateChange() {
-        if (window.location.href.match(/\.geojson$/)) {
-            var group = $('.meta .button-group'),
-                preexisting = $('.geojsonio-button');
-            if (!preexisting.length) {
-                $('<a></a>').appendTo(group)
-                    .text('geojson.io')
-                    .attr('class', 'button minibutton geojsonio-button')
-                    .attr('_target', 'blank')
-                    .attr('href', 'http://localhost:8080/#github:' + location.pathname);
+        if (location.hostname == 'github.com') {
+            if (window.location.href.match(/\.geojson$/)) {
+                injectOnGithub();
             }
+        } else if (location.hostname == 'gist.github.com') {
+            if ($('.gist-description p').text() == 'via:geojson.io') {
+                injectOnGist();
+            }
+        }
+    }
+
+    function injectOnGithub() {
+        var group = $('.meta .button-group'),
+            preexisting = $('.geojsonio-button');
+        if (!preexisting.length) {
+            var item = $('<a></a>').appendTo(group)
+                .attr('_target', 'blank')
+                .attr('class', 'button minibutton geojsonio-button')
+                .attr('href', 'http://localhost:8080/#github:' + location.pathname);
+            $('<span></span>').appendTo(item).attr('class', 'octicon octicon-globe');
+            $('<span></span>').appendTo(item)
+                .text('geojson.io');
+        }
+    }
+
+    function injectOnGist() {
+        var group = $('.export-references'),
+            preexisting = $('.geojsonio-button');
+        if (!preexisting.length) {
+            var item = $('<li><a></a></li>')
+                .appendTo(group)
+                .attr('class', 'minibutton geojsonio-button');
+            item.find('a')
+                .attr('_target', 'blank')
+                .attr('href', 'http://localhost:8080/#gist:' + location.pathname.match(/\/(\d+)/)[1]);
+            $('<span></span>')
+                .appendTo(item.find('a'))
+                .attr('class', 'octicon octicon-globe');
+            $('<span></span>')
+                .appendTo(item.find('a'))
+                .text('geojson.io');
         }
     }
 
