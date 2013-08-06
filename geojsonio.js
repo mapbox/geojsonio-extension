@@ -1,4 +1,5 @@
 function injection() {
+    var SITE = 'http://geojson.io';
     function getClassed(e, c) { return e.getElementsByClassName(c); }
 
     function geojsonioStateChange() {
@@ -20,7 +21,7 @@ function injection() {
             var item = $('<a></a>').appendTo(group)
                 .attr('_target', 'blank')
                 .attr('class', 'button minibutton geojsonio-button')
-                .attr('href', 'http://localhost:8080/#github:' + location.pathname);
+                .attr('href', SITE + '/#github:' + location.pathname);
             $('<span></span>').appendTo(item).attr('class', 'octicon octicon-globe');
             $('<span></span>').appendTo(item)
                 .text('geojson.io');
@@ -36,7 +37,7 @@ function injection() {
                 .attr('class', 'minibutton geojsonio-button');
             item.find('a')
                 .attr('_target', 'blank')
-                .attr('href', 'http://localhost:8080/#gist:' + location.pathname.match(/\/(\d+)/)[1]);
+                .attr('href', SITE + '/#gist:' + location.pathname.match(/\/(\d+)/)[1]);
             $('<span></span>')
                 .appendTo(item.find('a'))
                 .attr('class', 'octicon octicon-globe');
