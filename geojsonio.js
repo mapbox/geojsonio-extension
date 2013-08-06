@@ -1,11 +1,24 @@
-function getClassed(e, c) { return e.getElementsByClassName(c); }
+function injection() {
+    function getClassed(e, c) { return e.getElementsByClassName(c); }
 
-if (window.location.href.match(/\.geojson$/)) {
-    var meta = getClassed(document.body, 'meta')[0],
-        group = getClassed(meta, 'button-group')[0],
-        button = group.appendChild(document.createElement('a'));
-    button.innerHTML = 'geojson.io';
-    button.className = 'button minibutton';
-    button.setAttribute('_target', 'blank');
-    button.setAttribute('href', 'http://localhost:8080/#github:' + location.pathname);
+    function geojsonioStateChange() {
+        if (window.location.href.match(/\.geojson$/)) {
+            var group = $('.meta .button-group'),
+                preexisting = $('.geojsonio-button');
+            if (!preexisting.length) {
+                $('<a></a>').appendTo(group)
+                    .text('geojson.io')
+                    .attr('class', 'button minibutton geojsonio-button')
+                    .attr('_target', 'blank')
+                    .attr('href', 'http://localhost:8080/#github:' + location.pathname);
+            }
+        }
+    }
+
+    $(document).on('pjax:complete', geojsonioStateChange);
+
+    geojsonioStateChange();
 }
+
+var scr = document.body.appendChild(document.createElement('script'));
+scr.innerHTML = ('(' + injection + ')') + '()';

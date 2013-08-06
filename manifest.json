@@ -1,13 +1,14 @@
 {
-  "name" : "geojson.io",
-  "version" : "0.1",
-  "description" : "Edit files on GitHub and elsewhere in geojson.io",
-  "homepage_url" : "http://geojson.io/",
-  "content_scripts" : [
-    {
-      "matches" : [ "*://github.com/*" ],
-      "js" : [ "geojsonio.js" ]
-    }
-  ],
-  "manifest_version": 2
+    "name" : "geojson.io",
+    "version" : "0.2",
+    "description" : "Edit files on GitHub and elsewhere in geojson.io",
+    "homepage_url" : "http://geojson.io/",
+    "content_scripts" : [{
+        "matches" : ["*://github.com/*"],
+        "js" : ["geojsonio.js"]
+    }],
+    "web_accessible_resources": [
+        "geojsonio.js"
+    ],
+    "manifest_version": 2
 }
