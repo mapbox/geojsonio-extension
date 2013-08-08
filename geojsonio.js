@@ -1,6 +1,7 @@
 function injection() {
     var SITE = 'http://geojson.io';
     function getClassed(e, c) { return e.getElementsByClassName(c); }
+    function isGJ() { return $(this).text().match(/json$/); }
 
     function geojsonioStateChange() {
         if (location.hostname == 'github.com') {
@@ -8,7 +9,7 @@ function injection() {
                 injectOnGithub();
             }
         } else if (location.hostname == 'gist.github.com') {
-            if ($('.gist-description p').text() == 'via:geojson.io') {
+            if ($('strong.file-name').filter(isGJ).length) {
                 injectOnGist();
             }
         }
@@ -18,7 +19,7 @@ function injection() {
         var group = $('.meta .button-group'),
             preexisting = $('.geojsonio-button');
         if (!preexisting.length) {
-            var item = $('<a></a>').appendTo(group)
+            var item = $('<a></a>').prependTo(group)
                 .attr('_target', 'blank')
                 .attr('class', 'button minibutton geojsonio-button')
                 .attr('href', SITE + '/#github:' + location.pathname);
@@ -29,18 +30,17 @@ function injection() {
     }
 
     function injectOnGist() {
-        var group = $('.export-references'),
-            preexisting = $('.geojsonio-button');
+        var preexisting = $('.geojsonio-button');
         if (!preexisting.length) {
             var item = $('<li><a></a></li>')
-                .appendTo(group)
-                .attr('class', 'minibutton geojsonio-button');
+                .appendTo('ul.pagehead-actions')
+                .attr('class', 'minibutton');
             item.find('a')
                 .attr('_target', 'blank')
                 .attr('href', SITE + '/#gist:' + location.pathname.match(/\/(\d+)/)[1]);
             $('<span></span>')
                 .appendTo(item.find('a'))
-                .attr('class', 'octicon octicon-globe');
+                .attr('class', 'octicon octicon-pencil');
             $('<span></span>')
                 .appendTo(item.find('a'))
                 .text('geojson.io');
