@@ -1,0 +1,21 @@
+{
+  "name": "geojsonio-extension",
+  "version": "0.0.0",
+  "description": "[Download and install a build in the Releases Section](https://github.com/mapbox/geojsonio-extension/releases)",
+  "main": "bookmarklet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mapbox/geojsonio-extension.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/mapbox/geojsonio-extension/issues"
+  },
+  "dependencies": {
+    "uglify-js": "~2.3.6"
+  }
+}

@@ -5,7 +5,7 @@ function injection() {
 
     function geojsonioStateChange() {
         if (location.hostname == 'github.com') {
-            if (window.location.href.match(/\.geojson$/)) {
+            if (window.location.href.match(/\.(geo)?json$/)) {
                 injectOnGithub();
             }
         } else if (location.hostname == 'gist.github.com') {
