@@ -1,6 +1,7 @@
 function injection() {
+
     var SITE = 'http://geojson.io';
-    function getClassed(e, c) { return e.getElementsByClassName(c); }
+
     function isGJ() { return $(this).text().match(/json$/); }
 
     function geojsonioStateChange() {
@@ -19,10 +20,11 @@ function injection() {
         var group = $('.meta .button-group'),
             preexisting = $('.geojsonio-button');
         if (!preexisting.length) {
-            var item = $('<a></a>').prependTo(group)
+            var item = $('<a></a>')
+                .prependTo(group)
                 .attr('_target', 'blank')
                 .attr('class', 'button minibutton geojsonio-button')
-                .attr('href', SITE + '/#github:' + location.pathname);
+                .attr('href', SITE + '/#id=github:' + location.pathname.substring(1));
             $('<span></span>').appendTo(item).attr('class', 'octicon octicon-globe');
             $('<span></span>').appendTo(item)
                 .text('geojson.io');
@@ -37,7 +39,7 @@ function injection() {
                 .attr('class', 'minibutton');
             item.find('a')
                 .attr('_target', 'blank')
-                .attr('href', SITE + '/#gist:' + location.pathname.match(/\/(\d+)/)[1]);
+                .attr('href', SITE + '/#id=gist:' + location.pathname.substring(1));
             $('<span></span>')
                 .appendTo(item.find('a'))
                 .attr('class', 'octicon octicon-pencil');
